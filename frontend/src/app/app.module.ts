@@ -6,8 +6,7 @@ import { AppComponent } from './app.component';
 import { DataService } from './Services/data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-Imports:
-FormsModule
+
 
 
 
@@ -28,6 +27,23 @@ import { CxpagarComponent } from './Components/cxpagar/cxpagar.component';
 import { AreasTrabajoComponent } from './Components/areas-trabajo/areas-trabajo.component';
 import { EmpresaEditComponent } from './Components/empresa-edit/empresa-edit.component';
 
+import { NavegacionComponent } from './Components/navegacion/navegacion.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { FilterempresaPipe } from './Pipes/filterempresa.pipe';
+import { FilterempleadosPipe } from './Pipes/filterempleados.pipe';
+import { FilterclientesPipe } from './Pipes/filterclientes.pipe';
+import { FilterproveedorPipe } from './Pipes/filterproveedor.pipe';
+import { FiltersucursalesPipe } from './Pipes/filtersucursales.pipe';
+import { FilterproductoPipe } from './Pipes/filterproducto.pipe';
+import { FilterusuarioPipe } from './Pipes/filterusuario.pipe';
+import { FilterareasTrabajoPipe } from './Pipes/filterareastrabajo.pipe';
+import { FilterformapagoPipe } from './Pipes/filterformapago.pipe';
+import { FiltertipoproductoPipe } from './Pipes/filtertipoproducto.pipe';
+import { FiltertipousuarioPipe } from './Pipes/filtertipousuario.pipe';
+
+
 
 
 @NgModule({
@@ -47,13 +63,28 @@ import { EmpresaEditComponent } from './Components/empresa-edit/empresa-edit.com
     CxcobrarComponent,
     CxpagarComponent,
     AreasTrabajoComponent,
-    EmpresaEditComponent
+    EmpresaEditComponent,
+    NavegacionComponent,
+    FilterempresaPipe,
+    FilterempleadosPipe,
+    FilterclientesPipe,
+    FilterproveedorPipe,
+    FiltersucursalesPipe,
+    FilterproductoPipe,
+    FilterusuarioPipe,
+    FilterareasTrabajoPipe,
+    FilterformapagoPipe,
+    FiltertipoproductoPipe,
+    FiltertipousuarioPipe,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatMenuModule    
   ],
   providers: [DataService, HttpClientModule],
   bootstrap: [AppComponent]

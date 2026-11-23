@@ -39,10 +39,10 @@ controller.save = (req,res) =>{
 controller.update = (req,res) =>{
 
     const {idfpago}= req.params;
-    const nuevao_formapago = req.body;
+    const nueva_formapago = req.body;
   
     req.getConnection((err, conn) => {
-        conn.query('update formapago set ? where idfpago =?', [nuevao_formapago, idfpago], (err,rows) =>{ 
+        conn.query('update formapago set ? where idfpago =?', [nueva_formapago, idfpago], (err,rows) =>{ 
             res.json({ message: "Registro Actualizado" }); 
 
         });

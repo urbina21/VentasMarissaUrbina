@@ -12,21 +12,36 @@
                 <input type="text"  readonly="readonly"  [(ngModel)]="user.userid" name="userid" placeholder="No" class="form-control" required hidden>
           </div>                 
 
-              <div class="form-group">
-                  <label for="" class="control-label">ID Empresa</label>
-                  <input type="number"  [(ngModel)]="user.idempresa"  name="idempresa" placeholder="DIGITE ID EMPRESA"  class="form-control" autofocus>
+                            <div class="form-group">
+                  <label for="" class="control-label">Empresa</label>
+                  <select type="text"  [(ngModel)]="user.idempresa"  name="idempresa" placeholder="Seleccione la Empresa"  class="form-control" autofocus>
+                    <option value="">Seleccione la Empresa</option>
+                    <option *ngFor="let empresa of Empresalist" [value]="empresa.idempresa">{{ empresa.nombre }}</option>
+                  </select>
               </div>
+
               <div class="form-group">
-                <label for="" class="control-label">ID Sucursal</label>
-                <input type="number"  [(ngModel)]="user.idsuc"  name="idsuc" placeholder="DIGITE ID SUCURSAL"  class="form-control" autofocus>
+                <label for="" class="control-label">Sucursal</label>
+                <select type="text"  [(ngModel)]="user.idsuc"  name="idsuc" placeholder="Seleccione la Sucursal"  class="form-control" autofocus>
+                  <option value="">Seleccione la Sucursal</option>
+                  <option *ngFor="let sucursal of Sucursallist" [value]="sucursal.idsuc">{{ sucursal.sucursal }}</option>
+                </select>
               </div>
+
               <div class="form-group">
-                <label for="" class="control-label">ID Tipo Usuario</label>
-                <input type="number"  [(ngModel)]="user.idtpusuario"  name="idtpusuario" placeholder="DIGITE ID TIPO USUARIO"  class="form-control" autofocus>
+                <label class="control-label">Tipo Usuario</label>
+                <select class="form-control" [(ngModel)]="user.idtpusuario" name="idtpusuario" required autofocus>
+                  <option value="" disabled selected>Seleccione el Tipo de Usuario</option>
+                  <option *ngFor="let item of TipoUsuariolist" value="{{item.idtpusuario}}">{{item.tipo}}</option>
+                </select>
               </div>
+
               <div class="form-group">
                 <label for="" class="control-label">ID Empleado</label>
-                <input type="number"  [(ngModel)]="user.idemp"  name="idemp" placeholder="DIGITE ID EMPLEADO"  class="form-control" autofocus>
+                  <select class="form-control" [(ngModel)]="user.idemp" name="idemp" required autofocus>
+                  <option value="" disabled selected>Seleccione el Empleado</option>
+                  <option *ngFor="let item of Empleadoslist" value="{{item.idemp}}">{{item.idemp}}</option>
+                </select>
               </div>
               <div class="form-group">
                 <label for="" class="control-label">Usuario</label>
@@ -47,11 +62,16 @@
     </div>
 </div>
 </div>
+<div>
+ <input type="text" class="form-control mt-4" name="filterPost" placeholder="Digite el usuario que desea Buscar" [(ngModel)]="filterPost">
+</div>
 <br>
 
  <div class="container">  
+  <button (click)="exportToExcel()" class="btn btn-secondary">Exportar a Excel</button>
+&nbsp;&nbsp; <button class="btn btn-dark" (click)="openPDF()">Descargar PDF</button>
     <div class="row mt-25">         
-   <table class="table table-borbered table-hover">
+   <table class="table table-bordered table-hover" id="tabla">
       <thead>
         <tr>
             <th>NO</th>
@@ -65,7 +85,7 @@
         </tr>
       </thead>
     <tbody>
-                <tr *ngFor="let User of TUser">
+                <tr *ngFor="let User of TUser | filterusuario:filterPost">
                     <td >{{User.userid}}</td>
                     <td >{{User.idempresa}}</td>
                     <td >{{User.idsuc}}</td>

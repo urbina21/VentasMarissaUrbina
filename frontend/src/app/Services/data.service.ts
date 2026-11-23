@@ -51,7 +51,41 @@ export class DataService {
 
   update(id: string|number, updated: User , url: string): Observable<User> {
     return this.http.post(`${this.API_URI}` + url + `/${id}`, updated);
+
+  
   }
+
+  getDropListEmpresa():Observable<any[]>{
+return this.http.get<any>(this.API_URI+'/empresa')
+  }
+  getDropListSucursal(): Observable<any[]> {
+  return this.http.get<any>(this.API_URI+'/sucursales') 
+}
+getDropListArea(): Observable<any[]> {
+  return this.http.get<any>(this.API_URI+'/areas_trabajo') 
+}
+getDropListProducto(): Observable<any[]> {
+  return this.http.get<any>(this.API_URI+'/producto') 
+}
+getDropListTipoUsuario(): Observable<any[]> {
+  return this.http.get<any>(this.API_URI+'/tipousuario') 
+}
+getDropListTipoProducto(): Observable<any[]> {
+  return this.http.get<any>(this.API_URI+'/tipoproducto') 
+}
+getDropListEmpleados(): Observable<any[]> {
+  return this.http.get<any>(this.API_URI+'/empleados') 
+}
+getDropListProveedor(): Observable<any[]> {
+  return this.http.get<any>(this.API_URI+'/proveedor') 
+}
+getDropListUsuario(): Observable<any[]> {
+  return this.http.get<any>(this.API_URI+'/usuario') 
+}
+getDropListFormaPago(): Observable<any[]> {
+  return this.http.get<any>(this.API_URI+'/formapago') 
+}
+
 
 save<T>(Usuario: T, url: string)  {
      let headers = new HttpHeaders();

@@ -1,1 +1,139 @@
-<p>pagos works!</p>
+<nav class="navbar navbar-dark bg-dark">
+  <a href="/" class="navbar-brand">REGISTRO DE PAGOS</a>
+</nav>
+
+<div class="agregar_contenedor"></div>
+<div class="row mt-5">
+<div class="card">
+    <div class="card-body">
+        <form id="formulario" name="formulario" #f="ngForm" (ngSubmit)="AgregarValor()" novalidate >
+          <div class="form-group">
+            <label for="" class="control-label" hidden>Registro No.</label>
+                <input type="number"  readonly="readonly"  [(ngModel)]="user.idpago" name="idpago" placeholder="No" class="form-control" required hidden>
+          </div>                 
+
+                          <div class="form-group">
+                  <label for="" class="control-label">Empresa</label>
+                  <select type="text"  [(ngModel)]="user.idempresa"  name="idempresa" placeholder="Seleccione la Empresa"  class="form-control" autofocus>
+                    <option value="">Seleccione la Empresa</option>
+                    <option *ngFor="let empresa of Empresalist" [value]="empresa.idempresa">{{ empresa.nombre }}</option>
+                  </select>
+              </div>
+
+
+              <div class="form-group">
+                <label for="" class="control-label">Número de venta</label>
+                <input type="number"  [(ngModel)]="user.num_venta"  name="num_venta" placeholder="DIGITE EL NUMERO DE VENTA"  class="form-control" autofocus>
+              </div>
+
+              
+            <div class="form-group">
+                <label for="" class="control-label">Sucursal</label>
+                <select type="text"  [(ngModel)]="user.idsuc"  name="idsuc" placeholder="Seleccione la Sucursal"  class="form-control" autofocus>
+                  <option value="">Seleccione la Sucursal</option>
+                  <option *ngFor="let sucursal of Sucursallist" [value]="sucursal.idsuc">{{ sucursal.sucursal }}</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="" class="control-label">Número de cliente</label>
+                <input type="number"  [(ngModel)]="user.num_clie"  name="num_clie" placeholder="DIGITE EL NUMERO DE CLIENTE"  class="form-control" autofocus>
+              </div>
+
+               <div class="form-group">
+                <label for="" class="control-label">ID Usuario</label>
+                <input type="number"  [(ngModel)]="user.userid"  name="userid" placeholder="DIGITE EL ID DE USUARIO"  class="form-control" autofocus>
+              </div>
+
+              <div class="form-group">
+                <label for="" class="control-label">ID Forma de pago</label>
+                <input type="number"  [(ngModel)]="user.idfpago"  name="idfpago" placeholder="DIGITE EL ID FORMA DE PAGO"  class="form-control" autofocus>
+              </div>
+              <div class="form-group">
+                <label for="" class="control-label">Fecha Pago</label>
+                <input type="date"  [(ngModel)]="user.fecha_pago"  name="fecha_pago" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="" class="control-label">Cantidad</label>
+                <input type="number"  [(ngModel)]="user.cantidad"  name="cantidad" placeholder="DIGITE LA CANTIDAD"  class="form-control" autofocus>
+              </div>
+              <div class="form-group">
+                <label for="" class="control-label">Precio</label>
+                <input type="number"  [(ngModel)]="user.precio"  name="precio" placeholder="DIGITE EL PRECIO"  class="form-control" autofocus>
+              </div>
+               <div class="form-group">
+                <label for="" class="control-label">ISV</label>
+                <input type="number"  [(ngModel)]="user.isv"  name="isv" placeholder="DIGITE EL ISV"  class="form-control" autofocus>
+              </div>
+               <div class="form-group">
+                <label for="" class="control-label">Descuento</label>
+                <input type="number"  [(ngModel)]="user.descuento"  name="descuento" placeholder="DIGITE EL DESCUENTO"  class="form-control" autofocus>
+              </div>
+               <div class="form-group">
+                <label for="" class="control-label">Total</label>
+                <input type="number"  [(ngModel)]="user.total"  name="total" placeholder="DIGITE EL TOTAL"  class="form-control" autofocus>
+              </div>
+
+          <button type="submit" class="btn btn-primary" formnovalidate value="Save" onclick="javascript:alert('Registro Almacenado')">
+              Agregar
+          </button>
+        </form>
+    </div>
+</div>
+</div>
+
+<br>
+
+ <div class="container"> 
+  <button (click)="exportToExcel()" class="btn btn-secondary">Exportar a Excel</button>
+&nbsp;&nbsp; <button class="btn btn-dark" (click)="openPDF()">Descargar PDF</button>` 
+    <div class="row mt-25">
+              
+   <table class="table table-bordered table-hover" id="tabla"
+>
+      <thead>
+        <tr>
+            <th>NO</th>
+            <th>EMPRESA</th>
+            <th>NUM VENTA</th>
+            <th>ID SUCURSAL</th>
+            <th>ID USUARIO</th>          
+            <th>ID FORMAPAGO</th>
+            <th>FECHA PAGO</th>
+            <th>NUM PROD.</th>
+            <th>CANTIDAD</th>
+            <th>PRECIO</th>
+            <th>ISV</th>
+            <th>DESCUENTO</th>
+            <th>TOTAL</th>
+            <th>ESTADO</th>
+        </tr>
+      </thead>
+    <tbody>
+                <tr *ngFor="let User of TUser">
+                    <td >{{User.idpago}}</td>
+                    <td >{{User.idempresa}}</td>
+                    <td >{{User.num_venta}}</td>
+                    <td >{{User.idsuc}}</td>
+                    <td >{{User.num_clie}}</td>
+                    <td >{{User.userid}}</td>
+                    <td >{{User.idfpago}}</td>
+                    <td >{{User.fecha_pago}}</td>
+                    <td >{{User.num_prod}}</td>
+                    <td >{{User.cantidad}}</td>
+                    <td >{{User.precio}}</td>
+                    <td >{{User.isv}}</td>
+                    <td >{{User.descuento}}</td>
+                    <td >{{User.total}}</td>
+                    <td >{{User.estado}}</td>
+                    <td>  <button  class="btn btn-danger"  (click)="EliminarData(User.idpago)" onclick="javascript:alert('Registro Eliminado')" >Eliminar</button> </td>
+                    <td>
+                    <button  class="btn btn-success" [routerLink]="['/proveedor/edit', User.idprov]">
+                    Actualizar
+              </button>
+</td>
+                  </tr>
+     </tbody>
+   </table>
+</div>
+</div>

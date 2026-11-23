@@ -13,16 +13,27 @@
           </div>                 
 
               <div class="form-group">
-                  <label for="" class="control-label">ID Empresa</label>
-                  <input type="number"  [(ngModel)]="user.idempresa"  name="idempresa" placeholder="DIGITE ID EMPRESA"  class="form-control" autofocus>
+                  <label for="" class="control-label">Empresa</label>
+                  <select type="text"  [(ngModel)]="user.idempresa"  name="idempresa" placeholder="Seleccione la Empresa"  class="form-control" autofocus>
+                    <option value="">Seleccione la Empresa</option>
+                    <option *ngFor="let empresa of Empresalist" [value]="empresa.idempresa">{{ empresa.nombre }}</option>
+                  </select>
               </div>
+
               <div class="form-group">
-                <label for="" class="control-label">ID Sucursal</label>
-                <input type="number"  [(ngModel)]="user.idsuc"  name="idsuc" placeholder="DIGITE ID SUCURSAL"  class="form-control" autofocus>
+                <label for="" class="control-label">Sucursal</label>
+                <select type="text"  [(ngModel)]="user.idsuc"  name="idsuc" placeholder="Seleccione la Sucursal"  class="form-control" autofocus>
+                  <option value="">Seleccione la Sucursal</option>
+                  <option *ngFor="let sucursal of Sucursallist" [value]="sucursal.idsuc">{{ sucursal.sucursal }}</option>
+                </select>
               </div>
+
               <div class="form-group">
-                <label for="" class="control-label">ID Tipo Producto</label>
-                <input type="number"  [(ngModel)]="user.idtpprod"  name="idtpprod" placeholder="DIGITE ID TIPO PRODUCTO"  class="form-control" autofocus>
+                <label for="" class="control-label">Tipo Producto</label>
+                <select type="number"  [(ngModel)]="user.idtpprod"  name="idtpprod" placeholder="DIGITE ID TIPO PRODUCTO"  class="form-control" autofocus>
+                  <option value="">Seleccione el tipo de producto</option>
+                  <option *ngFor="let item of TipoProductolist" [value]="item.idtpprod">{{ item.tipo }}</option>
+                </select>
               </div>
               <div class="form-group">
                 <label for="" class="control-label">Descripción</label>
@@ -63,11 +74,17 @@
     </div>
 </div>
 </div>
+<div class="form-group">
+          <input type="text" class="form-control mt-4" name="filterPost" placeholder="Digite el producto que desea buscar" [(ngModel)]="filterPost">
+        </div>
+
 <br>
 
  <div class="container">  
+  <button (click)="exportToExcel()" class="btn btn-secondary">Exportar a Excel</button>
+&nbsp;&nbsp; <button class="btn btn-dark" (click)="openPDF()">Descargar PDF</button>`
     <div class="row mt-25">         
-   <table class="table table-borbered table-hover">
+   <table class="table table-bordered table-hover" id="tabla">
       <thead>
         <tr>
             <th>NO</th>
@@ -84,7 +101,7 @@
         </tr>
       </thead>
     <tbody>
-                <tr *ngFor="let User of TUser">
+                <tr *ngFor="let User of TUser | filterproducto:filterPost">
                     <td >{{User.num_prod}}</td>
                     <td >{{User.idempresa}}</td>
                     <td >{{User.idsuc}}</td>

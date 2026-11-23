@@ -1,6 +1,11 @@
 import { Component, OnInit} from '@angular/core';
 import { tipoproducto } from 'src/app/Interfaces/user';
 import { DataService } from '../../Services/data.service';
+import { ViewChild, ElementRef } from '@angular/core';
+import * as XLSX from 'xlsx';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
 
 
 @Component({
@@ -9,7 +14,9 @@ import { DataService } from '../../Services/data.service';
   styleUrls: ['./tipoproducto.component.css']
 })
 export class TipoproductoComponent implements OnInit {
+  name = 'tipos de productos.xlsx';
     TUser: any = [];
+    Empresalist: any;
 
   user: tipoproducto = {
     idtpprod: null,
@@ -21,7 +28,11 @@ export class TipoproductoComponent implements OnInit {
     constructor(private Data: DataService) { }
      ngOnInit(): void {
       this.getUser();
+      this.getDropListEmpresa();
   }
+
+    @ViewChild('htmlData') htmlData!: ElementRef;
+  filterPost = '';
 
       getUser() {
     this.Data.getAll('/tipoproducto')
@@ -51,6 +62,30 @@ this.getUser();
         err => console.error(err)
       );
   }
+    getDropListEmpresa() {
+    this.Data.getDropListEmpresa().subscribe((data:any)=>{
+      this.Empresalist=data;
+    })
+  }
 
-
+  
+exportToExcel(): void {
+    let element = document.getElementById('tabla');
+    const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+    const book: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(book, worksheet, 'Sheet1');
+    XLSX.writeFile(book, this.name);
+  }
+public openPDF(): void {
+    let DATA: any = document.getElementById('tabla');
+    html2canvas(DATA).then((canvas) => {
+      let fileWidth = 208;
+      let fileHeight = (canvas.height * fileWidth) / canvas.width;
+      const FILEURI = canvas.toDataURL('image/png');
+      let PDF = new jsPDF('p', 'mm', 'a4');
+      let position = 0;
+      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+      PDF.save('tipos-producto.pdf');
+    });
+  }
 }

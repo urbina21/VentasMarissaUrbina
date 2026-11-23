@@ -1,0 +1,58 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    
+    <!-- MENÚ 1: SISTEMA (Catálogos y Mantenimientos) -->
+    <button mat-button [matMenuTriggerFor]="menuSistema">Sistema</button>
+    <mat-menu #menuSistema="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="subOrganizacion">Organización</button>
+      <button mat-menu-item [matMenuTriggerFor]="subPersonas">Personas y Accesos</button>
+      <button mat-menu-item [matMenuTriggerFor]="subInventario">Inventario</button>
+    </mat-menu>
+
+    <!-- Submenú: Organización -->
+    <mat-menu #subOrganizacion="matMenu">
+      <a mat-menu-item routerLink="/empresa">Empresas</a>
+      <a mat-menu-item routerLink="/sucursales">Sucursales</a>
+      <a mat-menu-item routerLink="/areas_trabajo">Áreas de Trabajo</a>
+    </mat-menu>
+
+    <!-- Submenú: Personas y Accesos -->
+    <mat-menu #subPersonas="matMenu">
+      <a mat-menu-item routerLink="/empleados">Empleados</a>
+      <a mat-menu-item routerLink="/clientes">Clientes</a>
+      <a mat-menu-item routerLink="/proveedor">Proveedores</a>
+      <a mat-menu-item routerLink="/usuario">Usuarios</a>
+      <a mat-menu-item routerLink="/tipousuario">Tipos de Usuario</a>
+    </mat-menu>
+
+    <!-- Submenú: Inventario -->
+    <mat-menu #subInventario="matMenu">
+      <a mat-menu-item routerLink="/producto">Productos</a>
+      <a mat-menu-item routerLink="/tipoproducto">Tipos de Producto</a>
+    </mat-menu>
+
+    <!-- MENÚ 2: FINANZAS (Pagos y Cuentas) -->
+    <button mat-button [matMenuTriggerFor]="menuFinanzas">Consultas</button>
+    <mat-menu #menuFinanzas="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="subCuentas">Cuentas y Pagos</button>
+    </mat-menu>
+
+    <!-- Submenú: Cuentas y Pagos -->
+    <mat-menu #subCuentas="matMenu">
+      <a mat-menu-item routerLink="/formapago">Formas de Pago</a>
+      <a mat-menu-item routerLink="/pagos">Pagos</a>
+      <a mat-menu-item routerLink="/cxcobrar">Cuentas por Cobrar</a>
+      <a mat-menu-item routerLink="/cxpagar">Cuentas por Pagar</a>
+    </mat-menu>
+
+  </div>
+</nav>
+
+<!-- Banner Principal -->
+<div class="container mt-5">
+  <div class="p-5 mb-4 bg-dark text-white rounded-3 shadow text-center">
+    <div class="container-fluid py-4">
+      <h1 class="display-5 fw-bold">Navegación de Formularios</h1>
+    </div>
+  </div>
+</div>

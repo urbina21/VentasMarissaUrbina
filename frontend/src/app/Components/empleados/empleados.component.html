@@ -14,21 +14,28 @@
               </div>
 
               <div class="form-group">
-                <label for="" class="control-label">ID Empresa</label>
-                <input type="text"  [(ngModel)]="user.idempresa"  name="idempresa" placeholder="DIGITE EL ID DE EMPRESA"  class="form-control" autofocus>
-                
+                  <label for="" class="control-label">Empresa</label>
+                  <select type="text"  [(ngModel)]="user.idempresa"  name="idempresa" placeholder="Seleccione la Empresa"  class="form-control" autofocus>
+                    <option value="">Seleccione la Empresa</option>
+                    <option *ngFor="let empresa of Empresalist" [value]="empresa.id">{{ empresa.nombre }}</option>
+                  </select>
               </div>
 
-              <div class="form-group">
-                <label for="" class="control-label">ID Sucursal</label>
-                <input type="text"  [(ngModel)]="user.idsuc"  name="idsuc" placeholder="DIGITE EL ID DE SUCURSAL"  class="form-control" autofocus>
-            </div>
+            <div class="form-group">
+                <label for="" class="control-label">Sucursal</label>
+                <select type="text"  [(ngModel)]="user.idsuc"  name="idsuc" placeholder="Seleccione la Sucursal"  class="form-control" autofocus>
+                  <option value="">Seleccione la Sucursal</option>
+                  <option *ngFor="let sucursal of Sucursallist" [value]="sucursal.id">{{ sucursal.sucursal }}</option>
+                </select>
+              </div>
 
             <div class="form-group">
                 <label for="" class="control-label">ID Area</label>
-                <input type="text"  [(ngModel)]="user.idarea"  name="idarea" placeholder="DIGITE EL ID DEL AREA"  class="form-control" autofocus>
-            </div>
-
+                <select type="text"  [(ngModel)]="user.idarea"  name="idarea" placeholder="Seleccione el area"  class="form-control" autofocus>
+                  <option value="">Seleccione el Area</option>
+                  <option *ngFor="let lista of Arealist" [value]="lista.area">{{ lista.area }}</option>
+                </select>
+              </div>
             <div class="form-group">
                 <label for="" class="control-label">Identidad</label>
                 <input type="text"  [(ngModel)]="user.identidad"  name="contacto" placeholder="DIGITE LA IDENTIDAD"  class="form-control" autofocus>
@@ -91,14 +98,19 @@
     </div>
 </div>
 </div>
+<div class="form-group">
+          <input type="text" class="form-control mt-4" name="filterPost" placeholder="Escriba el nombre del empleado que busca" [(ngModel)]="filterPost">
+        </div>
 <br>
 <div class="container">  
 <div class="row mt-25">    
     <div>
 
- <div class="container">  
-    <div class="row mt-25">          
-   <table class="table table-borbered table-hover">
+<div class="container">  
+    <button (click)="exportToExcel()" class="btn btn-secondary">Exportar a Excel</button>
+&nbsp;&nbsp; <button class="btn btn-dark" (click)="openPDF()">Descargar PDF</button>`
+    <div class="card shadow-sm">          
+   <table class="table table-hover table-striped id='tabla' mb-0">
      <thead>
         <tr>
             <th>ID EMPLEADO</th>
@@ -122,7 +134,7 @@
       </thead>
     <tbody >
   
-                <tr *ngFor="let User of TUser">
+                <tr *ngFor="let User of TUser | filterempleados:filterPost">
                     <td >{{User.idemp}}</td>
                     <td >{{User.idempresa}}</td>
                     <td >{{User.idsucursal}}</td>
@@ -131,11 +143,11 @@
                     <td >{{User.fecha_nac}}</td>
                     <td >{{User.nombres}}</td>
                     <td >{{User.apellidos}}</td>
-                    <td >{{User.femenino}}</td>
-                    <td >{{User.masculino}}</td>
-                    <td >{{User.soltero}}</td>
-                    <td >{{User.casado}}</td>
-                    <td >{{User.unionlibre}}</td>
+                    <td >{{User.femenino?.data[0] === 1 ? 'Sí' : 'No'}}</td>
+                    <td >{{User.masculino?.data[0] === 1 ? 'Sí' : 'No'}}</td>
+                    <td >{{User.soltero?.data[0] === 1 ? 'Sí' : 'No'}}</td>
+                    <td >{{User.casado?.data[0] === 1 ? 'Sí' : 'No'}}</td>
+                    <td >{{User.unionlibre?.data[0] === 1 ? 'Sí' : 'No'}}</td>
                     <td >{{User.direccion}}</td>
                     <td >{{User.fecha_creacion}}</td>
                     <td >{{User.estado}}</td>

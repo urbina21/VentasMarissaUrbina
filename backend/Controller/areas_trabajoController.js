@@ -15,10 +15,10 @@ controller.list = (req, res) => {
 
 controller.edit = (req, res) => {
 
-    const {num_clie}= req.params;
+    const {idarea}= req.params;
    
     req.getConnection((err,conn) =>{
-        conn.query('select *from areas_trabajo where num_clie=?', [idarea], (err,areas_trabajo) => {
+        conn.query('select *from areas_trabajo where idarea=?', [idarea], (err,areas_trabajo) => {
             res.json(areas_trabajo[0]);
 
         });

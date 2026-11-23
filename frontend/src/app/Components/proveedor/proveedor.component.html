@@ -12,10 +12,14 @@
                 <input type="text"  readonly="readonly"  [(ngModel)]="user.idprov" name="idprov" placeholder="No" class="form-control" required hidden>
           </div>                 
 
-              <div class="form-group">
-                  <label for="" class="control-label">ID Empresa</label>
-                  <input type="number"  [(ngModel)]="user.idempresa"  name="idempresa" placeholder="DIGITE ID EMPRESA"  class="form-control" autofocus>
-              </div>
+          <div class="form-group">
+            <label>Empresa</label>
+            <select class="form-control" [(ngModel)]="user.idempresa" name="idempresa" required>
+              <option *ngFor="let lista of Empresalist" value={{lista.idempresa}}>{{lista.nombre}}</option>
+            </select>
+          </div>
+
+
               <div class="form-group">
                 <label for="" class="control-label">Proveedor</label>
                 <input type="text"  [(ngModel)]="user.proveedor"  name="proveedor" placeholder="DIGITE EL PROVEEDOR"  class="form-control" autofocus>
@@ -47,11 +51,19 @@
     </div>
 </div>
 </div>
+
+<div>
+ <input type="text" class="form-control mt-4" name="filterPost" placeholder="Digite el proveedor que desea Buscar" [(ngModel)]="filterPost">
+</div>
+
 <br>
 
- <div class="container">  
-    <div class="row mt-25">         
-   <table class="table table-borbered table-hover">
+ <div class="container"> 
+  <button (click)="exportToExcel()" class="btn btn-secondary">Exportar a Excel</button>
+&nbsp;&nbsp; <button class="btn btn-dark" (click)="openPDF()">Descargar PDF</button> 
+    <div class="row mt-25">
+              
+   <table class="table table-bordered table-hover" id="tabla">
       <thead>
         <tr>
             <th>NO</th>
@@ -66,7 +78,7 @@
         </tr>
       </thead>
     <tbody>
-                <tr *ngFor="let User of TUser">
+                <tr *ngFor="let User of TUser | filterproveedor:filterPost">
                     <td >{{User.idprov}}</td>
                     <td >{{User.idempresa}}</td>
                     <td >{{User.proveedor}}</td>

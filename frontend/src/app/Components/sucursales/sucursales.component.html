@@ -14,11 +14,18 @@
                   <div ng-show="!user.idsuc && formulario.$submitted" class="alert alert-warning">Digite el ID de la SUCURSAL</div>
 
               </div>
+            <div class="form-group">
+                        <option>Seleccione la Empresa</option>
+                          <select class="form-control" size="1" [(ngModel)]="user.idempresa" name="idsuc" required>
+                                 <option *ngFor="let lista of Empresalist" value={{lista.idempresa}}>{{lista.nombre}}</option>
+                        </select>
+                      </div>
+
               <div class="form-group">
-                <label for="" class="control-label">Id Empresa</label>
-                <input type="text"  [(ngModel)]="user.idempresa"  name="idempresa" placeholder="DIGITE EL ID DE LA EMPRESA"  class="form-control" autofocus>
-                
-              </div>
+                <label for="" class="control-label">Sucursal</label>
+                <input type="text"  [(ngModel)]="user.sucursal"  name="sucursal" placeholder="DIGITE LA SUCURSAL"  class="form-control" autofocus>
+            </div>
+
               <div class="form-group">
                 <label for="" class="control-label">Direccion</label>
                 <input type="text"  [(ngModel)]="user.dirsuc"  name="dirsuc" placeholder="DIGITE LA DIRECCION"  class="form-control" autofocus>
@@ -33,16 +40,24 @@
           </button>
         </form>
     </div>
+
 </div>
 </div>
+
+<div class="form-group mt-4">
+          <input type="text" class="form-control mt-4" name="filterPost" placeholder="Digite la Sucursal que desea buscar" [(ngModel)]="filterPost">
+        </div>
+
 <br>
 <div class="container">  
 <div class="row mt-25">    
     <div>
 
  <div class="container">  
+  <button (click)="exportToExcel()" class="btn btn-secondary">Exportar a Excel</button>
+&nbsp;&nbsp; <button class="btn btn-dark" (click)="openPDF()">Descargar PDF</button>
     <div class="row mt-25">          
-   <table class="table table-borbered table-hover">
+   <table class="table table-bordered table-hover" id="tabla">
      <thead>
         <tr>
             <th>ID SUCURSAL</th>
@@ -57,7 +72,7 @@
       </thead>
     <tbody >
   
-                <tr *ngFor="let User of TUser">
+                <tr *ngFor="let User of TUser | filtersucursales:filterPost">
                     <td >{{User.idsuc}}</td>
                     <td >{{User.idempresa}}</td>
                     <td >{{User.sucursal}}</td>

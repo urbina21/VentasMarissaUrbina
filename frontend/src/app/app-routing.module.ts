@@ -18,6 +18,8 @@ import { CxcobrarComponent } from './Components/cxcobrar/cxcobrar.component';
 import { CxpagarComponent } from './Components/cxpagar/cxpagar.component';
 import { AreasTrabajoComponent } from './Components/areas-trabajo/areas-trabajo.component';
 
+import { NavegacionComponent} from './Components/navegacion/navegacion.component';
+
 const routes: Routes = [ // AQUI COLOCAR LAS RUTAS DE LOS COMPONENTES
   { path: 'empresa', component: EmpresaComponent },
   { path: 'proveedor', component: ProveedorComponent },
@@ -34,8 +36,16 @@ const routes: Routes = [ // AQUI COLOCAR LAS RUTAS DE LOS COMPONENTES
   { path: 'cxpagar', component: CxpagarComponent },
   { path: 'areas_trabajo', component: AreasTrabajoComponent },
 
-  {path: 'empresa/edit/:id',component :EmpresaEditComponent}
+  {path: 'empresa/edit/:id',component :EmpresaEditComponent
+  },
 
+  {
+    path: 'navegacion',
+    component:NavegacionComponent
+  }
+
+
+  
   
 ];
 
