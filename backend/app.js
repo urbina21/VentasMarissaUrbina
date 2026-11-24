@@ -63,7 +63,7 @@ const empresaRoutes = require('./rutas/empresa');
 app.use(myConnection(mysql,{
     host:'localhost',
     user:'root',
-    password:'Sahlofolina21!',
+    password:'1234',
     port:3306,
     database:'ventas'
 }, 'single'));
